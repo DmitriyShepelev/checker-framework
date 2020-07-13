@@ -4,6 +4,10 @@ public class Cast {
 
     static final Object object = 1;
 
+    void client() {
+        objectiveParameter(object);
+    }
+
     void objectiveParameter(Object object) {
         integralParameter((Integer) object); // emits argument.type.incompatible error
     }
