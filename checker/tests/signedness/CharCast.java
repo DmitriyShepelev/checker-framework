@@ -36,13 +36,13 @@ public class CharCast {
     void clientShortUpcast() {
         short x = 1;
         int y = x;
-        Character.toString((char) y);
+        String s = Character.toString((char) y);
     }
 
-    void ClientReturnedShortUpcast() {
+    void clientReturnedShortUpcast() {
         int y = returnShort();
         // Subsequent line incorrectly emits argument.type.incompatible error.
-        Character.toString((char) y);
+        String s = Character.toString((char) y);
     }
 
     short returnShort() {
