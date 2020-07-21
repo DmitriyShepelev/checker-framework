@@ -1,10 +1,18 @@
 // @skip-test
+
 public class CharCast {
     int i;
 
+    void clientReturnedCastedShort(int x) {
+        char c = (char) x;
+    }
+
+    void clientReturnedCastedShort(int x) {
+        String s = Character.toString((char) x);
+    }
+
     void clientReturnedCastedShort() {
         int x = returnCastedShort();
-        // Subsequent line incorrectly emits argument.type.incompatible error.
         String s = Character.toString((char) x);
     }
 
@@ -13,7 +21,7 @@ public class CharCast {
     }
 
     void clientCastShort() {
-        int x = (short) i;
+        int x = (short) i; //
         // Subsequent line incorrectly emits argument.type.incompatible error.
         String s = Character.toString((char) x);
     }
