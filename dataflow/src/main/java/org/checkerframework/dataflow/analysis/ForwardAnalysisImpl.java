@@ -124,7 +124,7 @@ public class ForwardAnalysisImpl<
                     currentInput = inputBefore.copy();
                     Node lastNode = null;
                     boolean addToWorklistAgain = false;
-                    for (Node n : rb.getContents()) {
+                    for (Node n : rb.getNodes()) {
                         assert currentInput != null : "@AssumeAssertion(nullness): invariant";
                         TransferResult<V, S> transferResult = callTransferFunction(n, currentInput);
                         addToWorklistAgain |= updateNodeValues(n, transferResult);
@@ -274,7 +274,7 @@ public class ForwardAnalysisImpl<
                         // looking for.
                         TransferInput<V, S> store = transferInput;
                         TransferResult<V, S> transferResult;
-                        for (Node n : rb.getContents()) {
+                        for (Node n : rb.getNodes()) {
                             setCurrentNode(n);
                             if (n == node && before) {
                                 return store.getRegularStore();
@@ -282,7 +282,8 @@ public class ForwardAnalysisImpl<
                             if (cache != null && cache.containsKey(n)) {
                                 transferResult = cache.get(n);
                             } else {
-                                // Copy the store to preserve to change the state in the cache
+                                // Copy the store to avoid changing other blocks' transfer inputs in
+                                // {@link #inputs}
                                 transferResult = callTransferFunction(n, store.copy());
                                 if (cache != null) {
                                     cache.put(n, transferResult);
@@ -312,8 +313,10 @@ public class ForwardAnalysisImpl<
                             return transferInput.getRegularStore();
                         }
                         setCurrentNode(node);
+                        // Copy the store to avoid changing other blocks' transfer inputs in {@link
+                        // #inputs}
                         TransferResult<V, S> transferResult =
-                                callTransferFunction(node, transferInput);
+                                callTransferFunction(node, transferInput.copy());
                         return transferResult.getRegularStore();
                     }
                 default:

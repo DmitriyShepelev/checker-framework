@@ -51,6 +51,7 @@ import org.checkerframework.javacutil.ElementUtils;
 import org.checkerframework.javacutil.TreeUtils;
 import org.checkerframework.javacutil.TypeAnnotationUtils;
 import org.checkerframework.javacutil.TypesUtils;
+import org.plumelib.util.UtilPlume;
 
 /**
  * Collection of classes and helper functions to represent Java expressions about which the
@@ -446,9 +447,23 @@ public class FlowExpressions {
         return internalArguments;
     }
 
+    // The syntax that the Checker Framework uses for Java expressions also includes "<self>" and
+    // "#1" for formal parameters.  However, there are no special subclasses (AST nodes) for those
+    // extensions.
     /**
-     * The poorly-named Receiver class is actually a Java AST. Each subclass represents a different
-     * type of expression, such as MethodCall, ArrayAccess, LocalVariable, etc.
+     * This class represents a Java expression and its type. It does not represent all possible Java
+     * expressions (for example, it does not represent a ternary expression; use {@link
+     * FlowExpressions.Unknown} for unrepresentable expressions).
+     *
+     * <p>This class's representation is like an AST: subparts are also expressions. For declared
+     * names (fields, local variables, and methods), it also contains an Element.
+     *
+     * <p>Each subclass represents a different type of expression, such as {@link
+     * FlowExpressions.MethodCall}, {@link FlowExpressions.ArrayAccess}, {@link
+     * FlowExpressions.LocalVariable}, etc.
+     *
+     * @see <a href="https://checkerframework.org/manual/#java-expressions-as-arguments">the syntax
+     *     of Java expressions supported by the Checker Framework</a>
      */
     public abstract static class Receiver {
         /** The type of this expression. */
@@ -533,9 +548,9 @@ public class FlowExpressions {
         /**
          * Print this verbosely, for debugging.
          *
-         * @return a verbose printed representation of this
+         * @return a verbose string representation of this
          */
-        public String debugToString() {
+        public String toStringDebug() {
             return String.format(
                     "Receiver (%s) %s type=%s", getClass().getSimpleName(), toString(), type);
         }
@@ -1120,14 +1135,7 @@ public class FlowExpressions {
             String methodName = method.getSimpleName().toString();
             result.append(methodName);
             result.append("(");
-            boolean first = true;
-            for (Receiver p : parameters) {
-                if (!first) {
-                    result.append(", ");
-                }
-                result.append(p.toString());
-                first = false;
-            }
+            result.append(UtilPlume.join(", ", parameters));
             result.append(")");
             return result.toString();
         }
@@ -1475,15 +1483,8 @@ public class FlowExpressions {
                 }
             }
             if (!initializers.isEmpty()) {
-                boolean needComma = false;
                 sb.append(" {");
-                for (Receiver init : initializers) {
-                    if (needComma) {
-                        sb.append(", ");
-                    }
-                    sb.append(init);
-                    needComma = true;
-                }
+                sb.append(UtilPlume.join(", ", initializers));
                 sb.append("}");
             }
             return sb.toString();
