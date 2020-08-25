@@ -54,6 +54,7 @@ public class SignednessVisitor extends BaseTypeVisitor<SignednessAnnotatedTypeFa
 
         // We only care if the cast has an annotation.
         if (castType.getKind() != Kind.ANNOTATED_TYPE) {
+            System.out.println("Error: " + castType.getKind() + " != " + "KIND.ANNOTATED_TYPE");
             return null;
         }
         AnnotatedTypeTree annotatedType = (AnnotatedTypeTree) castType;
