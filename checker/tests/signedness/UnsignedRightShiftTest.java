@@ -1,6 +1,8 @@
 import org.checkerframework.checker.signedness.qual.*;
 
 public class UnsignedRightShiftTest {
+    int length;
+
     void unsignedRightShift() {
         int length = Integer.MAX_VALUE;
         byte b = (byte) (length >>> 24);
@@ -8,6 +10,10 @@ public class UnsignedRightShiftTest {
 
     void unsignedRightShiftWithParameter(int length) {
         byte b = (byte) (length >>> 24);
+    }
+
+    void unsignedRightShiftWithField() {
+        byte b = (byte) (this.length >>> 24);
     }
 
     void unsignedRightShiftComplex() {
