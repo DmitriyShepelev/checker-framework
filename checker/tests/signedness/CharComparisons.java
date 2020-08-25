@@ -30,7 +30,7 @@ public class CharComparisons {
         res = c <= b;
         res = c == b;
 
-        // Negative byte b and char c such that 66 < c.
+        // Negative byte b and char c such that 65 < c.
         c = 67;
         res = c > b;
         res = c >= b;
@@ -38,7 +38,7 @@ public class CharComparisons {
         res = c <= b;
         res = c == b;
 
-        // Positive byte b and char c such that 66 < c.
+        // Positive byte b and char c such that 65 < c.
         b = 1;
         res = c > b;
         res = c >= b;
