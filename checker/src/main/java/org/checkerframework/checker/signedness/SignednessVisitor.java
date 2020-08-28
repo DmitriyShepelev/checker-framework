@@ -54,7 +54,9 @@ public class SignednessVisitor extends BaseTypeVisitor<SignednessAnnotatedTypeFa
 
         // We only care if the cast has an annotation.
         if (castType.getKind() != Kind.ANNOTATED_TYPE) {
-            System.out.println("Error: " + castType.getKind() + " != " + "KIND.ANNOTATED_TYPE");
+            System.out.printf(
+                    "primitiveTypeCast returning null: cast=%s castType=%s castType.getKind()=%s%n",
+                    cast, castType, castType.getKind());
             return null;
         }
         AnnotatedTypeTree annotatedType = (AnnotatedTypeTree) castType;
@@ -260,6 +262,7 @@ public class SignednessVisitor extends BaseTypeVisitor<SignednessAnnotatedTypeFa
         Tree enclosing = TreeUtils.enclosingNonParen(visitorState.getPath()).first;
 
         PrimitiveTypeTree castPrimitiveType = primitiveTypeCast(enclosing);
+        // This ignores casts without an explicit annotation.  Should it?
         if (castPrimitiveType == null) {
             return false;
         }
