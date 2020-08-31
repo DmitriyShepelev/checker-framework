@@ -1,4 +1,4 @@
-import org.checkerframework.checker.signedness.qual.*;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 public class CharComparisons {
     char c;
@@ -18,40 +18,5 @@ public class CharComparisons {
         res = this.c < this.b;
         res = this.c <= this.b;
         res = this.c == this.b;
-    }
-
-    void unsignedComparisonLiterals(char c, @Unsigned byte b) {
-        // Negative byte b and char c such that 0 <= c <= 65.
-        c = 0;
-        b = -1;
-        boolean res = c > b;
-        res = c >= b;
-        res = c < b;
-        res = c <= b;
-        res = c == b;
-
-        // Negative byte b and char c such that 65 < c.
-        c = 67;
-        res = c > b;
-        res = c >= b;
-        res = c < b;
-        res = c <= b;
-        res = c == b;
-
-        // Positive byte b and char c such that 65 < c.
-        b = 1;
-        res = c > b;
-        res = c >= b;
-        res = c < b;
-        res = c <= b;
-        res = c == b;
-
-        // Positive byte b and char c such that 0 <= c <= 65.
-        c = 0;
-        res = c > b;
-        res = c >= b;
-        res = c < b;
-        res = c <= b;
-        res = c == b;
     }
 }
