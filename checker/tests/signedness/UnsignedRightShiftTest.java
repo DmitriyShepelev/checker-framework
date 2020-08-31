@@ -3,7 +3,7 @@ import org.checkerframework.checker.signedness.qual.*;
 public class UnsignedRightShiftTest {
     int length;
 
-    void unsignedRightShift() {
+    void unsignedRightShiftWithLiteral() {
         int length = Integer.MAX_VALUE;
         byte b = (byte) (length >>> 24);
     }
