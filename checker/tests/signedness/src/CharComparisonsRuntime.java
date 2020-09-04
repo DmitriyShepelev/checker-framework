@@ -1,12 +1,12 @@
 public class CharComparisonsRuntime {
     static void unsignedComparisonLiteralsPrinter(char c, byte b) {
-        boolean res = c > (b & 0xff);
+        boolean res = c > b;
         System.out.println(res);
-        res = c >= (b & 0xff);
+        res = c >= b;
         System.out.println(res);
-        res = c < (b & 0xff);
+        res = c < b;
         System.out.println(res);
-        res = c == (b & 0xff);
+        res = c == b;
         System.out.println(res);
     }
 
