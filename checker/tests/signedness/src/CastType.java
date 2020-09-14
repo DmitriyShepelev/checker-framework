@@ -1,6 +1,8 @@
+import org.checkerframework.checker.signedness.qual.Unsigned;
+
 public class CastType {
-    static void testUnsignedCastType(int length) {
-        byte b1 = (byte) (length >>> 24);
+    static void testUnsignedCastType(@Unsigned int length) {
+        byte b1 = (@Unsigned byte) (length >>> 24);
         System.out.println(b1);
     }
 
