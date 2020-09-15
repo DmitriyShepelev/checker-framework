@@ -136,7 +136,6 @@ public class FormatterVisitor extends BaseTypeVisitor<FormatterAnnotatedTypeFact
      * @return true if {@code fc} is a call to a format method that forwards its containing methods'
      *     arguments
      */
-    @SuppressWarnings("interning:not.interned") // comparisons of Name objects
     private boolean isWrappedFormatCall(FormatCall fc) {
 
         MethodTree enclosingMethod = TreeUtils.enclosingMethod(atypeFactory.getPath(fc.node));
@@ -195,8 +194,8 @@ public class FormatterVisitor extends BaseTypeVisitor<FormatterAnnotatedTypeFact
         // For method calls, it is issued in visitMethodInvocation.
         if (rhs != null
                 && lhs != null
-                && AnnotationUtils.areSameByName(rhs, atypeFactory.FORMAT)
-                && AnnotationUtils.areSameByName(lhs, atypeFactory.FORMAT)) {
+                && AnnotationUtils.areSameByName(rhs, FormatterAnnotatedTypeFactory.FORMAT_NAME)
+                && AnnotationUtils.areSameByName(lhs, FormatterAnnotatedTypeFactory.FORMAT_NAME)) {
             ConversionCategory[] rhsArgTypes =
                     atypeFactory.treeUtil.formatAnnotationToCategories(rhs);
             ConversionCategory[] lhsArgTypes =
