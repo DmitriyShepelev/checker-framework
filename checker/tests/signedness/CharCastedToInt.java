@@ -1,3 +1,4 @@
+// @skip-test
 public class CharCastedToInt {
     int charCastToInt(char c) {
         intParameter((int) c);

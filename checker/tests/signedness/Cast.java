@@ -1,3 +1,4 @@
+// @skip-test
 import org.checkerframework.checker.signedness.qual.*;
 
 public class Cast {
