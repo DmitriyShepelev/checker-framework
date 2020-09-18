@@ -1,3 +1,8 @@
+// Test case for issue 3667:
+// https://github.com/typetools/checker-framework/issues/3667
+
+// @skip-test until the issue is fixed
+
 import org.checkerframework.checker.signedness.qual.*;
 
 public class UnsignedRightShiftTest {
