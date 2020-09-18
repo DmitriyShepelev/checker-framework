@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
+import java.util.Vector;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
@@ -228,9 +229,11 @@ public class BaseTypeVisitor<Factory extends GenericAnnotatedTypeFactory<?, ?, ?
         ProcessingEnvironment env = checker.getProcessingEnvironment();
         this.vectorCopyInto = TreeUtils.getMethod("java.util.Vector", "copyInto", 1, env);
         this.functionApply = TreeUtils.getMethod("java.util.function.Function", "apply", 1, env);
-        this.vectorType = atypeFactory.fromElement(elements.getTypeElement("java.util.Vector"));
+        this.vectorType =
+                atypeFactory.fromElement(elements.getTypeElement(Vector.class.getCanonicalName()));
         targetValueElement =
-                TreeUtils.getMethod(java.lang.annotation.Target.class.getName(), "value", 0, env);
+                TreeUtils.getMethod(
+                        java.lang.annotation.Target.class.getCanonicalName(), "value", 0, env);
     }
 
     /**
@@ -2054,7 +2057,7 @@ public class BaseTypeVisitor<Factory extends GenericAnnotatedTypeFactory<?, ?, ?
             calledOnce = true; // don't issue cast unsafe warning.
         }
         // We cannot do a simple test of casting, as isSubtypeOf requires
-        // the input types to be subtypes according to Java
+        // the input types to be subtypes according to Java.
         if (!calledOnce && !isTypeCastSafe(castType, exprType)) {
             checker.reportWarning(
                     typeCastTree, "cast.unsafe", exprType.toString(true), castType.toString(true));
