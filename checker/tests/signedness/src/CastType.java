@@ -23,7 +23,7 @@ public class CastType {
         System.out.println("unsigned: " + intUnsigned(input) + " => " + intUnsigned(output));
     }
 
-    static long intUnsigned(int i) {
+    static long intUnsigned(@Unsigned int i) {
         return i & 0xFFFFFFFFL;
     }
 
