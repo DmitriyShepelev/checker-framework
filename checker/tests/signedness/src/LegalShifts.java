@@ -64,7 +64,7 @@ public class LegalShifts {
         printResults(input, output);
     }
 
-    static long intUnsigned(@Unsigned int i) {
+    static @Unsigned long intUnsigned(@Unsigned int i) {
         return i & 0xFFFFFFFFL;
     }
 
