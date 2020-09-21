@@ -1,3 +1,5 @@
+// @skip-test
+
 import org.checkerframework.checker.signedness.qual.Unsigned;
 
 // The output of this program is:
