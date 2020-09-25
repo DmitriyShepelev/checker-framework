@@ -1,10 +1,12 @@
+// @skip-test
+
 import org.checkerframework.checker.signedness.qual.Unsigned;
 
 public class CharComparisonsRuntime {
     static @Unsigned byte b;
     static char c;
 
-    static void unsignedComparisonLiteralsPrinter(char c, byte b) {
+    static void unsignedComparisonLiteralsPrinter(char c, @Unsigned byte b) {
         boolean res = c > b;
         System.out.println(res);
         res = c >= b;

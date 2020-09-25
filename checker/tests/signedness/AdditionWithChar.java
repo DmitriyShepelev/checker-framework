@@ -1,3 +1,4 @@
+// @skip-test
 public class AdditionWithChar {
     int i2;
 
