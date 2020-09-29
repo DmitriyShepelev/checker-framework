@@ -1,3 +1,5 @@
+// @skip-test
+
 public class RemainingUnsignedness {
     int returnIntWithLocalVariable(char c) {
         int i = c;

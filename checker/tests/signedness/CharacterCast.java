@@ -1,3 +1,5 @@
+// @skip-test
+
 public class CharacterCast {
     void castCharacter(Object o) {
         floatParameter((Character) o);

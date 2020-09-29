@@ -1,3 +1,5 @@
+// @skip-test
+
 public class MultipleObjectConversions {
     void castObjectToBoxedType(Object o) {
         floatParameter((Byte) o);

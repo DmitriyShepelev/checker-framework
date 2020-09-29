@@ -1,3 +1,5 @@
+// @skip-test
+
 public class CompoundAssignmentOperators {
     void additionWithCompoundAssignment(char c, int i1) {
         i1 += c;
