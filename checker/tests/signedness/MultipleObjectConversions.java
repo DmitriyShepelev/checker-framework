@@ -4,13 +4,11 @@ public class MultipleObjectConversions {
         floatParameter((Short) o);
         floatParameter((Integer) o);
         floatParameter((Long) o);
-        floatParameter((Character) o);
 
         doubleParameter((Byte) o);
         doubleParameter((Short) o);
         doubleParameter((Integer) o);
         doubleParameter((Long) o);
-        doubleParameter((Character) o);
     }
 
     void floatParameter(float f) {}
